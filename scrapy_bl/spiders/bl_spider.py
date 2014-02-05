@@ -15,13 +15,11 @@ class BlSpider(BaseSpider):
     def parse(self, response):
         hxs = HtmlXPathSelector(response)
 
-        sites = hxs.select('//span/@itemprop').extract()
-        for site in sites:
-            print site.xpath('isbn')
-            # print hxs.select('[@itemprop="isbn"]')
-            # print hxs.select('[@itemprop="ratingValue"]')
-            # print hxs.select('[@itemprop="bestRating"]')
-            # print hxs.select('[@itemprop="ratingCount"]')
-            # print hxs.select('[@itemprop="bookEdition"]')
-            # print hxs.select('[@itemprop="numberOfPages"]')
+        isbn = hxs.select('//span[@itemprop="isbn"]/text()').extract()
+        ratingValue = hxs.select('//span[@itemprop="ratingValue"]/text()').extract()
+        bestRating = hxs.select('//span[@itemprop="bestRating"]/text()').extract()
+        ratingCount = hxs.select('//span[@itemprop="ratingCount"]/text()').extract()
+        bookEdition = hxs.select('//span[@itemprop="bookEdition"]/text()').extract()
+        numberOfPages = hxs.select('//span[@itemprop="numberOfPages"]/text()').extract()
 
+        print isbn, numberOfPages, ratingValue, bookEdition
